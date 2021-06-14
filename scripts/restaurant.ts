@@ -1,19 +1,33 @@
+import firebase from "firebase";
+
 interface Seeder<T> {
-  seed: (count: number) => Array<T>
+  seed: (count: number) => any
 }
 
 interface Restaurant {
   name: string;
   rating: number;
   tags: Array<string>;
+  reviews: number;
 }
 
-class RestaurantSeeder implements Seeder<Restaurant>{
+const projectId = "myportfolio-2f9e2";
+const config = {
+  databaseURL: 'http://localhost:8080?ns=emulatorui',
+  projectId
+}
+firebase.initializeApp(config);
+const db = firebase.firestore();
+db.useEmulator("localhost", 8080);
+
+export default class RestaurantSeeder implements Seeder<Restaurant>{
   private readonly tags = [
     'Korean', 'Chinesse', 'Indian', 'Turkish', 'African', 'Vegan', 'Vegetarian'
   ];
 
   private readonly maxTagsAllowed = 3;
+
+  private readonly maxReviews = 600;
 
   private createRestaurant() {
     let name = '';
@@ -36,14 +50,24 @@ class RestaurantSeeder implements Seeder<Restaurant>{
 
     const rating = +((Math.random() * 4) + 1).toFixed(2);
 
-    return { name, tags, rating } as Restaurant;
+    const reviews = Math.floor((Math.random() * this.maxReviews) + 1);
+
+    return { name, tags, rating, reviews } as Restaurant;
   }
 
   public seed(count: number) {
-    return new Array(count).fill(null).map(() => this.createRestaurant() );
+    try {
+      new Array(count).fill(null).map(() => {
+        db.collection('resturants').add(this.createRestaurant())
+      });
+    } catch(err) {
+      console.log({err})
+    }
   }
 }
 
-const restaurantSeeder = new RestaurantSeeder();
-const restaurants = restaurantSeeder.seed(100);
-console.table(restaurants)
+const restaurant = new RestaurantSeeder();
+restaurant.seed(100);
+
+
+
