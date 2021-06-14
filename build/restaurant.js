@@ -37,14 +37,15 @@ var RestaurantSeeder = /** @class */ (function () {
             tags.push(assignedTag);
         }
         var rating = +((Math.random() * 4) + 1).toFixed(2);
-        var reviews = Math.floor((Math.random() * this.maxReviews) + 1);
-        return { name: name, tags: tags, rating: rating, reviews: reviews };
+        var ratingCount = Math.floor((Math.random() * this.maxReviews) + 1);
+        return { name: name, tags: tags, rating: rating, ratingCount: ratingCount };
     };
     RestaurantSeeder.prototype.seed = function (count) {
         var _this = this;
         try {
             new Array(count).fill(null).map(function () {
-                db.collection('resturants').add(_this.createRestaurant());
+                var restaurant = _this.createRestaurant();
+                db.doc("resturants/" + restaurant.name).set(restaurant);
             });
         }
         catch (err) {
@@ -53,7 +54,6 @@ var RestaurantSeeder = /** @class */ (function () {
     };
     return RestaurantSeeder;
 }());
-exports.default = RestaurantSeeder;
 var restaurant = new RestaurantSeeder();
 restaurant.seed(100);
 //# sourceMappingURL=restaurant.js.map
