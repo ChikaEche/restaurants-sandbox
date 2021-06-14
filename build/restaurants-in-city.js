@@ -49,18 +49,21 @@ var config = {
 firebase_1.default.initializeApp(config);
 var db = firebase_1.default.firestore();
 db.useEmulator("localhost", 8080);
-var TopRatedRestaurant = /** @class */ (function () {
-    function TopRatedRestaurant() {
+var RestaurantsInCity = /** @class */ (function () {
+    function RestaurantsInCity() {
     }
-    TopRatedRestaurant.prototype.topRated = function (limit, order) {
+    RestaurantsInCity.prototype.getRestaurant = function (limit, order, cities) {
         return __awaiter(this, void 0, void 0, function () {
             var response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
+                        console.log('here');
                         return [4 /*yield*/, db.collection('resturants')
-                                .orderBy('ratingCount', order).orderBy('rating', order).limit(limit).get()];
+                                .where('city', 'in', cities)
+                                .orderBy('city', order)
+                                .orderBy('ratingCount', order).orderBy('rating', order).get()];
                     case 1:
                         response = _a.sent();
                         response.forEach(function (docs) { return console.log(docs.data()); });
@@ -74,8 +77,8 @@ var TopRatedRestaurant = /** @class */ (function () {
             });
         });
     };
-    return TopRatedRestaurant;
+    return RestaurantsInCity;
 }());
-var topRatedRestaurant = new TopRatedRestaurant();
-topRatedRestaurant.topRated(7, interface_1.Order.DESCENDING);
-//# sourceMappingURL=top-rated-restaurant.js.map
+var restaurants = new RestaurantsInCity();
+restaurants.getRestaurant(7, interface_1.Order.ASCENDING, ['Dublin', 'Kildare']);
+//# sourceMappingURL=restaurants-in-city.js.map

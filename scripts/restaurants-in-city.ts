@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { TopRated, Restaurant, Order } from "./interface";
+import { Restaurant, Order } from "./interface";
 
 const projectId = "myportfolio-2f9e2";
 const config = {
@@ -10,12 +10,15 @@ firebase.initializeApp(config);
 const db = firebase.firestore();
 db.useEmulator("localhost", 8080);
 
-class TopRatedRestaurant implements TopRated<Restaurant> {
+class RestaurantsInCity {
 
-  public async topRated(limit: number, order: Order) {
+  public async getRestaurant(limit: number, order: Order, cities: string[]) {
     try {
+      console.log('here')
       const response = await db.collection('resturants')
-        .orderBy('ratingCount', order).orderBy('rating', order).limit(limit).get();
+        .where('city', 'in', cities)
+        .orderBy('city', order)
+        .orderBy('ratingCount', order).orderBy('rating', order).get();
       response.forEach((docs) => console.log(docs.data()))
     } catch(err) {
       console.log({err})
@@ -23,5 +26,6 @@ class TopRatedRestaurant implements TopRated<Restaurant> {
   }
 }
 
-const topRatedRestaurant = new TopRatedRestaurant();
-topRatedRestaurant.topRated(7, Order.DESCENDING)
+const restaurants = new RestaurantsInCity();
+
+restaurants.getRestaurant(7, Order.ASCENDING, ['Dublin', 'Kildare'])
