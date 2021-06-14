@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import db from "./firebase-config"
 import { Seeder, Restaurant } from "./interface";
 import { TAGS, CITIES } from "./utils";
 
@@ -7,9 +7,6 @@ const config = {
   databaseURL: 'http://localhost:8080?ns=emulatorui',
   projectId
 }
-firebase.initializeApp(config);
-const db = firebase.firestore();
-db.useEmulator("localhost", 8080);
 
 class RestaurantSeeder implements Seeder<Restaurant>{
 

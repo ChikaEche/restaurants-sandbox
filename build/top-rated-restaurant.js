@@ -39,16 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var firebase_1 = __importDefault(require("firebase"));
+var firebase_config_1 = __importDefault(require("./firebase-config"));
 var interface_1 = require("./interface");
 var projectId = "myportfolio-2f9e2";
 var config = {
     databaseURL: 'http://localhost:8080?ns=emulatorui',
     projectId: projectId
 };
-firebase_1.default.initializeApp(config);
-var db = firebase_1.default.firestore();
-db.useEmulator("localhost", 8080);
 var TopRatedRestaurant = /** @class */ (function () {
     function TopRatedRestaurant() {
     }
@@ -59,7 +56,7 @@ var TopRatedRestaurant = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, db.collection('resturants')
+                        return [4 /*yield*/, firebase_config_1.default.collection('resturants')
                                 .orderBy('ratingCount', order).orderBy('rating', order).limit(limit).get()];
                     case 1:
                         response = _a.sent();
