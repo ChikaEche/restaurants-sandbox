@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import { Seeder, Restaurant } from "./interface";
+import { TAGS, CITIES } from "./utils";
 
 const projectId = "myportfolio-2f9e2";
 const config = {
@@ -11,9 +12,6 @@ const db = firebase.firestore();
 db.useEmulator("localhost", 8080);
 
 class RestaurantSeeder implements Seeder<Restaurant>{
-  private readonly tags = [
-    'Korean', 'Chinesse', 'Indian', 'Turkish', 'African', 'Vegan', 'Vegetarian'
-  ];
 
   private readonly maxTagsAllowed = 3;
 
@@ -30,10 +28,14 @@ class RestaurantSeeder implements Seeder<Restaurant>{
 
     const tags: string[] = [];
 
+    const city = CITIES[Math.floor(Math.random() * CITIES.length)];
+
+
+
     for (let i = 0; i < numberOfTags; i++) {
-      let assignedTag = this.tags[Math.floor(Math.random() * this.tags.length)];
+      let assignedTag = TAGS[Math.floor(Math.random() * TAGS.length)];
       while(tags.indexOf(assignedTag) !== -1) {
-        assignedTag = this.tags[Math.floor(Math.random() * this.tags.length)];
+        assignedTag = TAGS[Math.floor(Math.random() * TAGS.length)];
       }
       tags.push(assignedTag);
     }
@@ -42,7 +44,7 @@ class RestaurantSeeder implements Seeder<Restaurant>{
 
     const ratingCount = Math.floor((Math.random() * this.maxReviews) + 1);
 
-    return { name, tags, rating, ratingCount } as Restaurant;
+    return { name, tags, rating, ratingCount, city } as Restaurant;
   }
 
   public seed(count: number) {

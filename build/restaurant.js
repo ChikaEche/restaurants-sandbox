@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var firebase_1 = __importDefault(require("firebase"));
+var utils_1 = require("./utils");
 var projectId = "myportfolio-2f9e2";
 var config = {
     databaseURL: 'http://localhost:8080?ns=emulatorui',
@@ -14,9 +15,6 @@ var db = firebase_1.default.firestore();
 db.useEmulator("localhost", 8080);
 var RestaurantSeeder = /** @class */ (function () {
     function RestaurantSeeder() {
-        this.tags = [
-            'Korean', 'Chinesse', 'Indian', 'Turkish', 'African', 'Vegan', 'Vegetarian'
-        ];
         this.maxTagsAllowed = 3;
         this.maxReviews = 600;
     }
@@ -29,16 +27,17 @@ var RestaurantSeeder = /** @class */ (function () {
             name = "" + name + String.fromCharCode(charCode);
         }
         var tags = [];
+        var city = utils_1.CITIES[Math.floor(Math.random() * utils_1.CITIES.length)];
         for (var i = 0; i < numberOfTags; i++) {
-            var assignedTag = this.tags[Math.floor(Math.random() * this.tags.length)];
+            var assignedTag = utils_1.TAGS[Math.floor(Math.random() * utils_1.TAGS.length)];
             while (tags.indexOf(assignedTag) !== -1) {
-                assignedTag = this.tags[Math.floor(Math.random() * this.tags.length)];
+                assignedTag = utils_1.TAGS[Math.floor(Math.random() * utils_1.TAGS.length)];
             }
             tags.push(assignedTag);
         }
         var rating = +((Math.random() * 4) + 1).toFixed(2);
         var ratingCount = Math.floor((Math.random() * this.maxReviews) + 1);
-        return { name: name, tags: tags, rating: rating, ratingCount: ratingCount };
+        return { name: name, tags: tags, rating: rating, ratingCount: ratingCount, city: city };
     };
     RestaurantSeeder.prototype.seed = function (count) {
         var _this = this;

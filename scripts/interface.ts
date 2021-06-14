@@ -11,6 +11,7 @@ export interface Restaurant {
   rating: number;
   tags: Array<string>;
   ratingCount: number;
+  city: string
 }
 
 export enum Order {
