@@ -2,12 +2,6 @@ import db from "./firebase-config"
 import { Seeder, Restaurant } from "./interface";
 import { TAGS, CITIES } from "./utils";
 
-const projectId = "myportfolio-2f9e2";
-const config = {
-  databaseURL: 'http://localhost:8080?ns=emulatorui',
-  projectId
-}
-
 class RestaurantSeeder implements Seeder<Restaurant>{
 
   private readonly maxTagsAllowed = 3;

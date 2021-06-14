@@ -41,10 +41,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var firebase_config_1 = __importDefault(require("./firebase-config"));
 var interface_1 = require("./interface");
-var RestaurantsInCity = /** @class */ (function () {
-    function RestaurantsInCity() {
+var RestaurantsByTags = /** @class */ (function () {
+    function RestaurantsByTags() {
     }
-    RestaurantsInCity.prototype.getRestaurant = function (limit, order, cities) {
+    RestaurantsByTags.prototype.getRestaurants = function (order, tags) {
         return __awaiter(this, void 0, void 0, function () {
             var response, err_1;
             return __generator(this, function (_a) {
@@ -52,8 +52,8 @@ var RestaurantsInCity = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, firebase_config_1.default.collection('resturants')
-                                .where('city', 'in', cities)
-                                .orderBy('city', order)
+                                .where('tags', 'array-contains-any', tags)
+                                .where('city', '==', 'Cork')
                                 .orderBy('ratingCount', order).orderBy('rating', order).get()];
                     case 1:
                         response = _a.sent();
@@ -68,8 +68,8 @@ var RestaurantsInCity = /** @class */ (function () {
             });
         });
     };
-    return RestaurantsInCity;
+    return RestaurantsByTags;
 }());
-var restaurants = new RestaurantsInCity();
-restaurants.getRestaurant(7, interface_1.Order.ASCENDING, ['Dublin', 'Kildare']);
-//# sourceMappingURL=restaurants-in-city.js.map
+var restaurants = new RestaurantsByTags();
+restaurants.getRestaurants(interface_1.Order.DESCENDING, ['African']);
+//# sourceMappingURL=restaurants.by-tag.js.map

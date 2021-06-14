@@ -1,13 +1,12 @@
 import db from "./firebase-config"
 import { Order } from "./interface";
 
-class RestaurantsInCity {
+class RestaurantsByTags {
 
-  public async getRestaurant(limit: number, order: Order, cities: string[]) {
+  public async getRestaurants(order: Order, tags: string[]) {
     try {
       const response = await db.collection('resturants')
-        .where('city', 'in', cities)
-        .orderBy('city', order)
+        .where('tags', 'array-contains-any', tags)
         .orderBy('ratingCount', order).orderBy('rating', order).get();
       response.forEach((docs) => console.log(docs.data()))
     } catch(err) {
@@ -16,6 +15,6 @@ class RestaurantsInCity {
   }
 }
 
-const restaurants = new RestaurantsInCity();
+const restaurants = new RestaurantsByTags();
 
-restaurants.getRestaurant(7, Order.ASCENDING, ['Dublin', 'Kildare'])
+restaurants.getRestaurants(Order.DESCENDING, ['African'])

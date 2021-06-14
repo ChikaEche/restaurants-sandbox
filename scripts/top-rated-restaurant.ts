@@ -1,12 +1,6 @@
 import db from "./firebase-config"
 import { TopRated, Restaurant, Order } from "./interface";
 
-const projectId = "myportfolio-2f9e2";
-const config = {
-  databaseURL: 'http://localhost:8080?ns=emulatorui',
-  projectId
-}
-
 class TopRatedRestaurant implements TopRated<Restaurant> {
 
   public async topRated(limit: number, order: Order) {
