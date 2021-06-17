@@ -35,18 +35,18 @@ class RestaurantSeeder implements Seeder<Restaurant>{
 
     const ratingCount = Math.floor((Math.random() * this.maxReviews) + 1);
 
-    return { name, tags, rating, ratingCount, city } as Restaurant;
+    //return { name, tags, rating, ratingCount, city } as Restaurant;
   }
 
   public seed(count: number) {
-    try {
-      new Array(count).fill(null).map(() => {
-        const restaurant = this.createRestaurant()
-        db.doc(`resturants/${restaurant.name}`).set(restaurant)
-      });
-    } catch(err) {
-      console.log({err})
-    }
+    // try {
+    //   new Array(count).fill(null).map(() => {
+    //     const restaurant = this.createRestaurant()
+    //     db.doc(`resturants/${restaurant.name}`).set(restaurant)
+    //   });
+    // } catch(err) {
+    //   console.log({err})
+    // }
   }
 }
 

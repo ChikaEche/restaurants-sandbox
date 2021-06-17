@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var firebase_config_1 = __importDefault(require("./firebase-config"));
 var utils_1 = require("./utils");
 var RestaurantSeeder = /** @class */ (function () {
     function RestaurantSeeder() {
@@ -29,19 +25,17 @@ var RestaurantSeeder = /** @class */ (function () {
         }
         var rating = +((Math.random() * 4) + 1).toFixed(2);
         var ratingCount = Math.floor((Math.random() * this.maxReviews) + 1);
-        return { name: name, tags: tags, rating: rating, ratingCount: ratingCount, city: city };
+        //return { name, tags, rating, ratingCount, city } as Restaurant;
     };
     RestaurantSeeder.prototype.seed = function (count) {
-        var _this = this;
-        try {
-            new Array(count).fill(null).map(function () {
-                var restaurant = _this.createRestaurant();
-                firebase_config_1.default.doc("resturants/" + restaurant.name).set(restaurant);
-            });
-        }
-        catch (err) {
-            console.log({ err: err });
-        }
+        // try {
+        //   new Array(count).fill(null).map(() => {
+        //     const restaurant = this.createRestaurant()
+        //     db.doc(`resturants/${restaurant.name}`).set(restaurant)
+        //   });
+        // } catch(err) {
+        //   console.log({err})
+        // }
     };
     return RestaurantSeeder;
 }());

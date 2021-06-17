@@ -40,35 +40,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var firebase_config_1 = __importDefault(require("./firebase-config"));
-var interface_1 = require("./interface");
-var RestaurantsByTags = /** @class */ (function () {
-    function RestaurantsByTags() {
+var axios_1 = __importDefault(require("axios"));
+var RestaurantsFromYelp = /** @class */ (function () {
+    function RestaurantsFromYelp() {
+        this.url = "https://api.yelp.com/v3/businesses/search?location=IE&categories=restaurants&limit=50";
+        this.authToken = "Bearer FowdXnE190MvB9P6oyiI_G7NIO5si_zVXsPxB7Th0ymh9kH5vPOmF-xIZX-AMstjiTQRihkzAwWVdcjV8X-_xsOzi2f6RGRmozd49OnRkcqJZT3YSw5_wQwrzgW8XnYx";
     }
-    RestaurantsByTags.prototype.getRestaurants = function (order, tags) {
+    RestaurantsFromYelp.prototype.getRestaurants = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, err_1;
+            var businesses;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, firebase_config_1.default.collection('resturants')
-                                .where('tags', 'array-contains-any', tags)
-                                .orderBy('ratingCount', order).orderBy('rating', order).get()];
+                    case 0: return [4 /*yield*/, axios_1.default.get(this.url, {
+                            headers: {
+                                Authorization: this.authToken
+                            }
+                        })];
                     case 1:
-                        response = _a.sent();
-                        response.forEach(function (docs) { return console.log(docs.data()); });
-                        return [3 /*break*/, 3];
-                    case 2:
-                        err_1 = _a.sent();
-                        console.log({ err: err_1 });
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                        businesses = (_a.sent()).data.businesses;
+                        businesses.forEach(function (_a) {
+                            var name = _a.name, rating = _a.rating, location = _a.location, review_count = _a.review_count, categories = _a.categories;
+                            var display_address = location.display_address;
+                            var tags = categories.map(function (_a) {
+                                var title = _a.title;
+                                return title;
+                            });
+                            firebase_config_1.default.doc("restaurants/" + name).set({
+                                name: name,
+                                rating: rating,
+                                location: display_address.join(' '),
+                                review_count: review_count,
+                                tags: tags
+                            });
+                        });
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    return RestaurantsByTags;
+    return RestaurantsFromYelp;
 }());
-var restaurants = new RestaurantsByTags();
-restaurants.getRestaurants(interface_1.Order.DESCENDING, ['African']);
-//# sourceMappingURL=restaurants.by-tag.js.map
+var restaurants = new RestaurantsFromYelp();
+restaurants.getRestaurants();
+//# sourceMappingURL=restaurants-yelp.js.map

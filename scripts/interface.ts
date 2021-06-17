@@ -9,9 +9,9 @@ export interface TopRated<T> {
 export interface Restaurant {
   name: string;
   rating: number;
-  tags: Array<string>;
-  ratingCount: number;
-  city: string
+  categories: Array<{title: string}>;
+  review_count: number;
+  location: {display_address: Array<string>}
 }
 
 export enum Order {
