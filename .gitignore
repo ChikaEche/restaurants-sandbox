@@ -62,4 +62,10 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+scripts/env.ts
+
+build/
+
+data.ms/
+
+meilisearch

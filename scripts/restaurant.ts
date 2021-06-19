@@ -1,6 +1,6 @@
-import db from "./firebase-config"
-import { Seeder, Restaurant } from "./interface";
-import { TAGS, CITIES } from "./utils";
+import db from "../config/firebase-config"
+import { Seeder, Restaurant } from "../interfaces/interface";
+import { TAGS, CITIES } from "../utils/utils";
 
 class RestaurantSeeder implements Seeder<Restaurant>{
 

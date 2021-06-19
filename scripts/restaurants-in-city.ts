@@ -1,5 +1,5 @@
-import db from "./firebase-config"
-import { Order } from "./interface";
+import db from "../config/firebase-config"
+import { Order } from "../interfaces/interface";
 
 class RestaurantsInCity {
 

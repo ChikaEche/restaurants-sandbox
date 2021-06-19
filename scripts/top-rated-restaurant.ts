@@ -1,5 +1,5 @@
-import db from "./firebase-config"
-import { TopRated, Restaurant, Order } from "./interface";
+import db from "../config/firebase-config"
+import { TopRated, Restaurant, Order } from "../interfaces/interface";
 
 class TopRatedRestaurant implements TopRated<Restaurant> {
 
