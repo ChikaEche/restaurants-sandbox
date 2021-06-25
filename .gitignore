@@ -69,3 +69,5 @@ build/
 data.ms/
 
 meilisearch
+
+config/
