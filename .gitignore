@@ -72,4 +72,10 @@ meilisearch
 
 /config
 
+interfaces/
+
+scripts/
+
+utils/
+
 config/
