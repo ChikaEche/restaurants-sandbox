@@ -28,7 +28,6 @@ class RestaurantsFromYelp {
       const { display_address } = location;
       const tags = categories.map(({title}) => title)
       const data = {
-        id,
         name,
         rating,
         location: display_address.join(' '),
@@ -37,7 +36,7 @@ class RestaurantsFromYelp {
       }
       const restaurantRef = db.doc(`restaurants/${id}`);
       batch.set(restaurantRef, data);
-      return data;
+      return {...data, id};
     });
 
     const response = await this.client.index('restaurants').addDocuments(restaurants);
