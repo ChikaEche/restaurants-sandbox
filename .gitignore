@@ -70,4 +70,6 @@ data.ms/
 
 meilisearch
 
-config
+/config
+
+config/
