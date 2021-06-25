@@ -7,7 +7,7 @@ export const onResaturantCreate = functions.firestore
   .document('restaurants/{id}')
   .onCreate(async (snapshot, ctx) => {
     const restaurant = snapshot.data();
-    search.index('restaurants').addDocuments([{restaurant, id: snapshot.id}]);
+    await search.index('restaurants').addDocuments([{restaurant, id: snapshot.id}]);
   })
 
 export const onRestaurantUpdate = functions.firestore
@@ -18,34 +18,39 @@ export const onRestaurantUpdate = functions.firestore
       id: snapshot.after.id,
       ...restaurant
     }
-    search.index('restaurants').updateDocuments([data])
+    await search.index('restaurants').updateDocuments([data])
   })
 
 export const weeklyUpdate = functions.pubsub.schedule('every 7 days').onRun(async () => {
   const yelpUrl = functions.config().yelp.host;
   const yelpApi = functions.config().yelp.api_key;
 
-  const { businesses } = (await axios.get(yelpUrl, {
-    headers: {
-      Authorization: yelpApi
-    }
-  })).data;
+  try {
+    const { businesses } = (await axios.get(yelpUrl, {
+      headers: {
+        Authorization: yelpApi
+      }
+    })).data;
+  
+    const batch = firestore.batch();
+  
+    businesses.map(({id, name, rating, location, review_count, categories}: Restaurant) => {
+      const { display_address } = location;
+      const tags = categories.map(({title}) => title)
+      const data = {
+        name,
+        rating,
+        location: display_address.join(' '),
+        review_count,
+        tags
+      }
+      const restaurantRef = firestore.doc(`restaurants/${id}`);
+      batch.set(restaurantRef, data);
+    });
+  
+    await batch.commit();
 
-  const batch = firestore.batch();
-
-  businesses.map(({id, name, rating, location, review_count, categories}: Restaurant) => {
-    const { display_address } = location;
-    const tags = categories.map(({title}) => title)
-    const data = {
-      name,
-      rating,
-      location: display_address.join(' '),
-      review_count,
-      tags
-    }
-    const restaurantRef = firestore.doc(`restaurants/${id}`);
-    batch.set(restaurantRef, data);
-  });
-
-  batch.commit();
+  } catch(e) {
+    console.log(e)
+  }
 })

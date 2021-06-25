@@ -1,7 +1,7 @@
 
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import MeiliSearch from 'meilisearch';
+import { MeiliSearch } from 'meilisearch';
 
 admin.initializeApp();
 
