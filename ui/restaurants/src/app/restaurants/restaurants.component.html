@@ -5,16 +5,15 @@
         <mat-card-title>{{restaurant.name}}</mat-card-title>
         <mat-card-subtitle>{{restaurant.location}}</mat-card-subtitle>
       </mat-card-header>
-      
       <mat-card-content>
+        
         <div class="cuisine">
           <h2>Cuisines</h2>
           <div *ngFor="let cusine of restaurant.tags">
             <span> {{cusine}}</span>
           </div>
         </div>
-      </mat-card-content>
-      <mat-card-actions>
+
         <div class="actions">
           <div class="rating" [matTooltip]="restaurant.review_count + ' customers rated this restaurant'">
             <span>{{restaurant.rating}}</span>
@@ -28,7 +27,7 @@
             <a mat-raised-button color="primary" [href]="restaurant.url">Visit  website</a>
           </div>
         </div>
-      </mat-card-actions>
+      </mat-card-content>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

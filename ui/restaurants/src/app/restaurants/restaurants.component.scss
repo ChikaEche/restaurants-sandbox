@@ -1,11 +1,19 @@
-img {
-  width: 100px;
+.mat-card-header-text {
+  margin: 0;
+}
+
+.mat-card-content {
+  margin: 0 16px;
 }
 
 .mat-card {
   width: 100%;
-  margin: 20px;
   padding: 20px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: center;
 }
 
 .rating, .star, .actions {
@@ -13,7 +21,9 @@ img {
   align-items: center;
 }
 
-
+.actions {
+  margin-top: 20px;
+}
 .cuisine div {
   display: inline;
 }
