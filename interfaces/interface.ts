@@ -12,7 +12,9 @@ export interface Restaurant {
   categories: Array<{title: string}>;
   review_count: number;
   location: {display_address: Array<string>},
-  id: number
+  id: number,
+  image_url: string,
+  url: string
 }
 
 export enum Order {

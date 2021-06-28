@@ -1,0 +1,31 @@
+img {
+  width: 100px;
+}
+
+.mat-card {
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+}
+
+.rating, .star, .actions {
+  display: flex;
+  align-items: center;
+}
+
+
+.cuisine div {
+  display: inline;
+}
+
+.cuisine div:not(:last-child):after {
+  content: ",";
+}
+
+.rating {
+  cursor: pointer;
+}
+
+.actions {
+  justify-content: space-between;
+}

@@ -1,3 +1,34 @@
-<div *ngFor="let restaurant of restaurants">
-  <span>{{restaurant.location}}</span>
-</div>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let restaurant of restaurants">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{restaurant.name}}</mat-card-title>
+        <mat-card-subtitle>{{restaurant.location}}</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="cuisine">
+          <h2>Cuisines</h2>
+          <div *ngFor="let cusine of restaurant.tags">
+            <span> {{cusine}}</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="actions">
+          <div class="rating" [matTooltip]="restaurant.review_count + ' customers rated this restaurant'">
+            <span>{{restaurant.rating}}</span>
+            <div *ngFor="let index of restaurant.stars" class="star">
+              <mat-icon color="primary" *ngIf="index === 1">star</mat-icon>
+              <mat-icon color="primary" *ngIf="index === 0.5">star_half</mat-icon>
+              <mat-icon color="primary" *ngIf="index === 0">star_border</mat-icon>
+            </div>
+          </div>
+          <div>
+            <a mat-raised-button color="primary" [href]="restaurant.url">Visit  website</a>
+          </div>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

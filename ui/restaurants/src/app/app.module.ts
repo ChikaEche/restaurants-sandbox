@@ -10,12 +10,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    RestaurantsComponent
+    RestaurantsComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,8 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
     BrowserAnimationsModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

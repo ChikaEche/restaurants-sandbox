@@ -24,7 +24,7 @@ class RestaurantsFromYelp {
 
     const batch = db.batch();
 
-    const restaurants = businesses.map(({id, name, rating, location, review_count, categories}: Restaurant) => {
+    const restaurants = businesses.map(({id, name, rating, location, review_count, categories, image_url, url}: Restaurant) => {
       const { display_address } = location;
       const tags = categories.map(({title}) => title)
       const data = {
@@ -32,7 +32,9 @@ class RestaurantsFromYelp {
         rating,
         location: display_address.join(' '),
         review_count,
-        tags
+        tags,
+        url,
+        image_url
       }
       const restaurantRef = db.doc(`restaurants/${id}`);
       batch.set(restaurantRef, data);

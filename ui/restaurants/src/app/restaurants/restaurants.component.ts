@@ -19,12 +19,22 @@ export class RestaurantsComponent implements OnInit {
 
   ngOnInit() {
     this.restaurantsService.get().pipe(
-      map((restaurants) => this.restaurants = [...restaurants]),
+      map((restaurants) => {
+        this.restaurants = restaurants.map((restaurant) => {
+          let stars = [
+            ...new Array(Math.floor(restaurant.rating)).fill(1),
+            ...new Array(Math.round(restaurant.rating) - Math.floor(restaurant.rating)).fill(0.5)
+          ];
+          stars = [...stars, ...new Array(Math.floor(5 - stars.length)).fill(0)];
+          return {...restaurant, stars};
+        });
+      }),
       catchError((err) => {
-        console.error({err})
-        return of(null)
+        console.error({err});
+        return of(null);
       })
     ).subscribe();
+
   }
 
 }
