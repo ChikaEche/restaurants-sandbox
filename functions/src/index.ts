@@ -2,11 +2,13 @@ import * as functions from 'firebase-functions';
 import { firestore, search } from './config';
 import axios from "axios";
 import{ Restaurant } from "./interface";
+import { resizeImage } from './resize-image';
 
 export const onResaturantCreate = functions.firestore
   .document('restaurants/{id}')
   .onCreate(async (snapshot, ctx) => {
     const restaurant = snapshot.data();
+    await resizeImage(restaurant.image_url)
     await search.index('restaurants').addDocuments([{restaurant, id: snapshot.id}]);
   })
 
@@ -18,6 +20,8 @@ export const onRestaurantUpdate = functions.firestore
       id: snapshot.after.id,
       ...restaurant
     }
+
+    await resizeImage(restaurant.image_url)
     await search.index('restaurants').updateDocuments([data])
   })
 

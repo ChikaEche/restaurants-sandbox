@@ -13,3 +13,5 @@ export const search = new MeiliSearch({
   host: functions.config().meilisearch.host, 
   apiKey: functions.config().meilisearch.api_key
 });
+
+export const storage = admin.storage();
