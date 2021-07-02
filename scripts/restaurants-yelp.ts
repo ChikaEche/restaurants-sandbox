@@ -27,6 +27,7 @@ class RestaurantsFromYelp {
     const restaurants = businesses.map(({id, name, rating, location, review_count, categories, image_url, url}: Restaurant) => {
       const { display_address } = location;
       const tags = categories.map(({title}) => title)
+      tags.push('');
       const data = {
         name,
         rating,

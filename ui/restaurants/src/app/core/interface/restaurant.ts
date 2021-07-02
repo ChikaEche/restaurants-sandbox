@@ -1,5 +1,5 @@
 export interface Restaurant {
-  review_count: string;
+  review_count: number;
   name: string;
   tags: Array<string>;
   rating: number;

@@ -1,5 +1,5 @@
 <mat-grid-list cols="2">
-  <mat-grid-tile *ngFor="let restaurant of restaurants">
+  <mat-grid-tile *ngFor="let restaurant of (restaurantsService.restaurants$ | async)">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{restaurant.name}}</mat-card-title>

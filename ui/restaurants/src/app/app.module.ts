@@ -11,12 +11,14 @@ import { environment } from 'src/environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     RestaurantsComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
