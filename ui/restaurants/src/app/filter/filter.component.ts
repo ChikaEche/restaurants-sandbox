@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { RestaurantsService } from '../core/services/restaurants.service';
 import { Order } from '../core/enums/order';
 import { CuisineOptionsService } from '../core/services/cuisine-options.service';
@@ -20,9 +20,8 @@ export class FilterComponent {
     public readonly cuisineOptionsService: CuisineOptionsService
   ) {
     this.activatedRoute.queryParams.pipe(
-      tap((params) => {
-        console.log(params)
-        restaurantService.filter(params.order, params.cuisine ? JSON.parse(params.cuisine) : null);
+      switchMap((params) => {
+        return this.restaurantService.filter(params.order, params.cuisine ? JSON.parse(params.cuisine) : null);
       })
     ).subscribe();
   }

@@ -3,6 +3,7 @@ import { RestaurantsService } from '../core/services/restaurants.service';
 import { Restaurant } from '../core/interface/restaurant';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { BreakPointService } from '../core/services/breakpoint.service';
 
 @Component({
   selector: 'app-restaurants',
@@ -12,7 +13,8 @@ import { of } from 'rxjs';
 export class RestaurantsComponent {
 
   constructor(
-    public readonly restaurantsService: RestaurantsService
+    public readonly restaurantsService: RestaurantsService,
+    public readonly breakPointService: BreakPointService
   ) { }
 
 }

@@ -1,35 +1,37 @@
-<mat-grid-list cols="2">
-  <mat-grid-tile *ngFor="let restaurant of (restaurantsService.restaurants$ | async)">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{restaurant.name}}</mat-card-title>
-        <mat-card-subtitle>{{restaurant.location}}</mat-card-subtitle>
-      </mat-card-header>
-      <div class="image"><img mat-mat-card-image [src]="restaurant.image_url" /></div>
-      <mat-card-content>
-        
-        <div class="cuisine">
-          <h2>Cuisines</h2>
-          <div *ngFor="let cusine of restaurant.tags">
-            <span> {{cusine}}</span>
-          </div>
-        </div>
+<div class="restaurant__wrap">
+  <div 
+    [ngStyle]="(breakPointService.isLargeScreen$ | async) ? {} : {'width' : '90%'}"
+    class="restaurant" *ngFor="let restaurant of (restaurantsService.restaurants$ | async)">
+    <div>
+      <div>
+        <h3>{{restaurant.name}}</h3>
+      </div>
+      <div><span>{{restaurant.location}}</span></div>
+    </div>
 
-        <div class="actions">
-          <div class="rating" [matTooltip]="restaurant.review_count + ' customers rated this restaurant'">
-            <span>{{restaurant.rating}}</span>
-            <div *ngFor="let index of restaurant.stars" class="star">
-              <mat-icon color="primary" *ngIf="index === 1">star</mat-icon>
-              <mat-icon color="primary" *ngIf="index === 0.5">star_half</mat-icon>
-              <mat-icon color="primary" *ngIf="index === 0">star_border</mat-icon>
-            </div>
-          </div>
-          <div>
-            <a mat-raised-button color="primary" [href]="restaurant.url">Visit  website</a>
-          </div>
+    <div class="image">
+      <img [src]="restaurant.image_url" alt="image">
+    </div>
+
+    <div class="cuisine">
+      <h3>Cuisines</h3>
+      <div *ngFor="let cusine of restaurant.tags">
+        <span> {{cusine}}</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="rating" [matTooltip]="restaurant.review_count + ' customers rated this restaurant'">
+        {{restaurant.rating}}
+        <div *ngFor="let index of restaurant.stars" class="star">
+          <mat-icon color="primary" *ngIf="index === 1">star</mat-icon>
+          <mat-icon color="primary" *ngIf="index === 0.5">star_half</mat-icon>
+          <mat-icon color="primary" *ngIf="index === 0">star_border</mat-icon>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-  
-</mat-grid-list>
+      </div>
+      <div>
+        <a mat-raised-button color="primary" [href]="restaurant.url" target="_blank">Visit  website</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,9 +14,9 @@
       <mat-form-field appearance="legacy">
         <mat-label>Select cuisine</mat-label>
         <mat-select [formControl]="cuisine" multiple>
-          <mat-option *ngFor="let cuisine of (cuisineOptionsService.cuisineOptions$ | async)"
+          <mat-option (onSelectionChange)="search()" *ngFor="let cuisine of (cuisineOptionsService.cuisineOptions$ | async)"
           [value]="cuisine">
-            {{cuisine}}
+            <span>{{cuisine}}</span>
           </mat-option>
         </mat-select>
       </mat-form-field>

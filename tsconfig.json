@@ -16,5 +16,5 @@
     "allowSyntheticDefaultImports": true
     
   },
-  "exclude": ["ui", "functions"]
+  "exclude": ["ui", "functions"],
 }

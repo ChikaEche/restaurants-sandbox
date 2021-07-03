@@ -12,6 +12,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FilterComponent } from './filter/filter.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FilterComponent } from './filter/filter.component';
     LayoutComponent,
     RestaurantsComponent,
     FilterComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
