@@ -1,9 +1,26 @@
-<div>
-  <mat-form-field appearance="legacy">
-    <mat-label>Select sorting by rate</mat-label>
-    <mat-select>
-      <mat-option>Ascending</mat-option>
-      <mat-option>Descending</mat-option>
-    </mat-select>
-  </mat-form-field>
+<div class="options">
+  <div class="firebase_data">
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Sort by rate</mat-label>
+        <mat-select [(ngModel)]="selectedSort" name="sort">
+          <mat-option value="Ascending">Ascending</mat-option>
+          <mat-option value="Descending">Descending</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Select cuisine</mat-label>
+        <mat-select [formControl]="cuisine" multiple>
+          <mat-option *ngFor="let cuisine of (cuisineOptionsService.cuisineOptions$ | async)"
+          [value]="cuisine">
+            {{cuisine}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div><button mat-raised-button color="primary" (click)="search()">Search</button></div>
+  </div>
 </div>

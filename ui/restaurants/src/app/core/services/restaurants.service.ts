@@ -16,11 +16,13 @@ export class RestaurantsService {
   ) {}
 
   filter(order?: Order, cuisine?: Array<string>) {
+    console.log({order, cuisine})
     from(
       this.firestore.collection<Restaurant>('restaurants').ref
-      .where('tags', 'array-contains-any', cuisine ? cuisine : [''])
+      .where('tags', 'array-contains-any', cuisine ? cuisine : [' '])
       .orderBy('rating', order ? order : 'asc').get()).pipe(
       tap((restaurant) => {
+        console.log(restaurant.size)
         let restaurantData: Restaurant[] = [];
         restaurant.forEach((docs) => {
           let stars = [

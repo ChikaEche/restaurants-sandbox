@@ -24,25 +24,33 @@ class RestaurantsFromYelp {
 
     const batch = db.batch();
 
+    const cuisineOptions: Array<string> = []
+
     const restaurants = businesses.map(({id, name, rating, location, review_count, categories, image_url, url}: Restaurant) => {
       const { display_address } = location;
-      const tags = categories.map(({title}) => title)
-      tags.push('');
+      const tags: Array<string> = [];
+      categories.forEach(({title}) => {
+        tags.push(title)
+        if(cuisineOptions.indexOf(title) < 0) cuisineOptions.push(title)
+      })
+      tags.push(' ');
       const data = {
         name,
         rating,
-        location: display_address.join(' '),
+        location: display_address.join(''),
         review_count,
         tags,
         url,
         image_url
       }
       const restaurantRef = db.doc(`restaurants/${id}`);
-      batch.set(restaurantRef, data);
+      const cuisineOptionRef = db.doc('cuisines/options');
+      batch.set(cuisineOptionRef, {options: cuisineOptions}, {merge: true})
+      //batch.set(restaurantRef, data);
       return {...data, id};
     });
 
-    const response = await this.client.index('restaurants').addDocuments(restaurants);
+    //const response = await this.client.index('restaurants').addDocuments(restaurants);
     batch.commit();
   }
 }

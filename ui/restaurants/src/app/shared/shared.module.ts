@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const declarations = [];
 
@@ -30,7 +31,9 @@ const imports = [
   MatCardModule,
   MatTooltipModule,
   MatSelectModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  FormsModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({
