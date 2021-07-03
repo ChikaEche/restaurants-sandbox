@@ -15,7 +15,8 @@ export const environment = {
     measurementId: 'G-1VW3Q23CP1'
   },
   meiliSearch: {
-    apiKey: 'Bearer FowdXnE190MvB9P6oyiI_G7NIO5si_zVXsPxB7Th0ymh9kH5vPOmF-xIZX-AMstjiTQRihkzAwWVdcjV8X-_xsOzi2f6RGRmozd49OnRkcqJZT3YSw5_wQwrzgW8XnYx'
+    apiKey: 'ODQ2NDY0NjU0ZWQ0YjI4MzhjNmMzYTQ3',
+    host: 'http://meilisearch-aws-instance.chikaokafor.dev/'
   }
 };
 

@@ -1,5 +1,5 @@
 .mat-toolbar {
-  height: fit-content;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -17,4 +17,10 @@
 .restaurant__wrap {
   width: 100%;
   height: 100%;
+}
+
+.query {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

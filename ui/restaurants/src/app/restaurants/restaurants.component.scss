@@ -70,4 +70,15 @@ span {
   }
 }
 
+@media only screen and (max-width: 800px) {
+  .restaurant__wrap {
+    padding: 5px;
+  }
+
+  .restaurant {
+    padding: 10px;
+    margin: 0 0 10px 0;
+  }
+}
+
 

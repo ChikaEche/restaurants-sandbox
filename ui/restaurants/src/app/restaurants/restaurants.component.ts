@@ -4,6 +4,7 @@ import { Restaurant } from '../core/interface/restaurant';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { BreakPointService } from '../core/services/breakpoint.service';
+import { SearchService } from '../core/services/search.service';
 
 @Component({
   selector: 'app-restaurants',
@@ -14,7 +15,8 @@ export class RestaurantsComponent {
 
   constructor(
     public readonly restaurantsService: RestaurantsService,
-    public readonly breakPointService: BreakPointService
+    public readonly breakPointService: BreakPointService,
+    public readonly searchService: SearchService
   ) { }
 
 }
