@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "myportfolio-2f9e2"
+  },
+  "targets": {
+    "myportfolio-2f9e2": {
+      "hosting": {
+        "restaurants": [
+          "restaurants-ad84"
+        ]
+      }
+    }
   }
 }

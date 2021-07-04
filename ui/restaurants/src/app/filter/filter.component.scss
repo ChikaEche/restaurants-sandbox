@@ -11,4 +11,12 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .mat-form-field, .firebase_data div {
+    width: 100%;
+  }
 }

@@ -16,8 +16,8 @@ export class RestaurantsService {
     private readonly firestore: AngularFirestore
   ) {}
 
-  filter(order?: Order, cuisine?: Array<string>) {
-    if (cuisine === null || cuisine.length === 0) {
+  filter(order?: Order, cuisine: Array<string> = []) {
+    if (!cuisine?.length) {
       cuisine = [' '];
     }
 

@@ -25,6 +25,7 @@
     "source": "functions"
   },
   "hosting": {
+    "target": "restaurants",
     "public": "ui/restaurants/dist/restaurants",
     "ignore": [
       "firebase.json",

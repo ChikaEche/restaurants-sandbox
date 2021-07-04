@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="((searchService.restaurants$ | async)?.length === 0)">
-    <span>No results was found</span>
-  </div>
+</div>
+<div *ngIf="((searchService.restaurants$ | async)?.length === 0)" class="no_data">
+  <h3>No results was found 😞</h3>
 </div>

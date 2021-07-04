@@ -16,7 +16,7 @@ export const environment = {
   },
   meiliSearch: {
     apiKey: 'ODQ2NDY0NjU0ZWQ0YjI4MzhjNmMzYTQ3',
-    host: 'http://meilisearch-aws-instance.chikaokafor.dev/'
+    host: 'https://meilisearch-aws-instance.chikaokafor.dev/'
   }
 };
 
