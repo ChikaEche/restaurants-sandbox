@@ -26,12 +26,10 @@ meilisearch
 
 /config
 
-interfaces
+interfaces/
 
-scripts
+scripts/
 
-utils
+utils/
 
-config
-
-node_modules
+config/
