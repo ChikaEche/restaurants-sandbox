@@ -12,6 +12,6 @@ meilisearch.
 
 # Start angular app l;ocally
 - Make sure you have npm and angular cli installed
-- Clone the repo using https://github.com/ChikaEche/restaurants-sandbox.git
+- Clone the repo using git clone https://github.com/ChikaEche/restaurants-sandbox.git
 - cd into angular app run npm install
 - run ng serve to spin up the app locally
