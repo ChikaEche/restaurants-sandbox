@@ -10,7 +10,7 @@ meilisearch.
 
 - Website https://restaurants.chikaokafor.dev
 
-# Start angular app l;ocally
+# Start angular app locally
 - Make sure you have npm and angular cli installed
 - Clone the repo using git clone https://github.com/ChikaEche/restaurants-sandbox.git
 - cd into angular app run npm install
