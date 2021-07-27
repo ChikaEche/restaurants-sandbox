@@ -1,6 +1,8 @@
 # restaurants-sandbox
 
 - This app uses angular on the front end, firebase as the back end
+- A scheduled firebase cloud function updates the restuarants data every week
+- There are two additional cloud functions that listens for when a documents on firestore is updated or added, it's automatically updates meilisearch index with the updated data
 
 Restaurants is a web app that shows 50 restaurants in
 Dublin with their name, location, rating, and pictures using
